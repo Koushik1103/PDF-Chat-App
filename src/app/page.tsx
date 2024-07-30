@@ -28,7 +28,8 @@ export default async function Home() {
               <FileUpload />
             ) : (
               <Link href="/sign-in">
-                <Button>Login to get Started!
+                <Button>
+                  Login to get Started!
                   <LogIn className="w-4 h-4 ml-2" />
                 </Button>
               </Link>
