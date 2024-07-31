@@ -8,6 +8,8 @@ import {
   SignInButton,
   UserButton,
 } from "@clerk/nextjs";
+import Providers from "@/components/Providers";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,13 +24,16 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider afterSignOutUrl={"/"}>
-      <html lang="en">
-        <body className={inter.className}>
-          {children}
-          <SignedOut></SignedOut>
-          <SignedIn></SignedIn>
-        </body>
-      </html>
+      <Providers>
+        <html lang="en">
+          <body className={inter.className}>
+            {children}
+            <SignedOut></SignedOut>
+            <SignedIn></SignedIn>
+          </body>
+          <Toaster />
+        </html>
+      </Providers>
     </ClerkProvider>
   );
 }
