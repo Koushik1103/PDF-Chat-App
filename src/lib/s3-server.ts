@@ -4,8 +4,8 @@ import fs from 'fs';
 export async function downloadFromS3(file_key: string) {
   try {
     AWS.config.update({
-      accessKeyId: process.env.NEXT_PUBLIC_S3_ACCESS_KEY_ID,
-      secretAccessKey: process.env.NEXT_PUBLIC_S3_SECRET_ACCESS_KEY,
+      accessKeyId: process.env.NEXT_PUBLIC_S3_ACCESS_KEY_ID!,
+      secretAccessKey: process.env.NEXT_PUBLIC_S3_SECRET_ACCESS_KEY!,
     });
     const s3 = new AWS.S3({
       params: {
@@ -20,6 +20,8 @@ export async function downloadFromS3(file_key: string) {
     const obj = await s3.getObject(params).promise()
     const file_name = `/tmp/pdf-${Date.now()}.pdf`
     fs.writeFileSync(file_name, obj.Body as Buffer)
+    // console.log(file_name);
+    return file_name;
   } catch (error) {
     console.error(error);
     return null;
